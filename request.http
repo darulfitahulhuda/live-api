@@ -1,0 +1,284 @@
+Access-Control-Allow-Origin: http://localhost:3000
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE
+Access-Control-Allow-Headers: Content-Type
+
+### Register
+POST http://localhost:3000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "name": "Pikri tes doang",
+    "email": "emailtesting126@gmail.com",
+    "no_hp": "089272376172",
+    "password": "Pikri_123"
+}
+
+### Verify
+POST http://localhost:3000/api/v1/auth/verify
+Content-Type: application/json
+
+{
+    "email": "syofianpikri@gmail.com",
+    "otp": "259413"
+}
+
+### Get New OTP
+PUT http://localhost:3000/api/v1/auth/verify/newOtp
+Content-Type: application/json
+
+{
+    "email": "syofian.fikri@gmail.com"
+}
+
+### Login
+POST http://localhost:3000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "syofian.fikri@gmail.com",
+    "password": "Pikri_123"
+}
+
+### Forget Password
+POST http://localhost:3000/api/v1/auth/forget-password
+Content-Type: application/json
+
+{
+    "email" : "syofian.fikri@gmail.com"
+}
+
+### Reset Password
+PUT http://localhost:3000/api/v1/auth/reset-password?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN5b2ZpYW4uZmlrcmlAZ21haWwuY29tIiwiaWF0IjoxNzAyOTYzNTcyfQ.lhJJUj7eYRB3LvUqRG4oR41rdRrGc-AnPwEbckEezsQ
+Content-Type: application/json
+
+{
+    "password": "#Pikri123",
+    "password_confirmation": "#Pikri123"
+}
+
+### Get Me
+GET http://localhost:3000/api/v1/auth/me
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTcxOTMxMTYxNX0.Xg1Orgx51A-rS24KnkLdE2fHBkpwlCo79vuU2EokdyA
+
+### Get All Categories List
+GET http://localhost:3000/api/v1/categories
+Content-Type: application/json
+
+### Get Categories Detail
+GET http://localhost:3000/api/v1/categories/detail/1?limit=10&page=1
+Content-Type: application/json
+
+
+### Get All Course List
+GET http://localhost:3000/api/v1/course/list?limit=15&page=1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzAyOTA5NzUzfQ.66RzvkwvngFogIULZFgyD3pTFfvE3PdQBMSZ5rAjn_0
+Content-Type: application/json
+
+### Get Course Populer (Top 3 Course)
+GET http://localhost:3000/api/v1/course/populer/1
+Content-Type: application/json
+
+### Get All Populer Course (Top 6 Course)
+GET http://localhost:3000/api/v1/course/populerall
+Content-Type: application/json
+
+### Get User Course
+GET http://localhost:3000/api/v1/course/user-enrollement
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzAzOTU0OTkwfQ.pPFjyghbLveXJdk6Yeu-BNJHwLM6Dl9DWQP0vrYlNzU
+Content-Type: application/json
+
+### Get Course Detail
+GET http://localhost:3000/api/v1/course/details/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzAzOTU0OTkwfQ.pPFjyghbLveXJdk6Yeu-BNJHwLM6Dl9DWQP0vrYlNzU
+Content-Type: application/json
+
+### Add Rating
+POST http://localhost:3000/api/v1/course/rating/24
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzAzNzczMzcxfQ.oGoeK9H-1rLYLcu8udCEGnYlQy4N_Q9_vn1UTt7jIA0
+Content-Type: application/json
+
+{
+    "rating": 4.1
+}
+
+### Get Course Detail
+POST http://localhost:3000/api/v1/course/updateisdone/9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzAzOTU0OTkwfQ.pPFjyghbLveXJdk6Yeu-BNJHwLM6Dl9DWQP0vrYlNzU
+Content-Type: application/json
+
+### Get Premium Course
+GET http://localhost:3000/api/v1/course/premium?level=Intermediate&sortBy=latest
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzAyOTA5NzUzfQ.66RzvkwvngFogIULZFgyD3pTFfvE3PdQBMSZ5rAjn_0
+Content-Type: application/json
+
+### Get Free Course
+GET http://localhost:3000/api/v1/course/free?categoryId=1&level=Beginner&sortBy=latest
+Content-Type: application/json
+
+### Get All (Free & Prem) Course
+GET http://localhost:3000/api/v1/course/all?type=isPremium
+Content-Type: application/json
+
+### Get Search
+GET http://localhost:3000/api/v1/course/search?name=full-stack
+Content-Type: application/json
+
+### Get Filter
+GET http://localhost:3000/api/v1/course/filter?category=1&level=Beginner&limit=10&page=1&rating=true&terbaru=true
+Content-Type: application/json
+
+### Create Enrollment
+POST http://localhost:3000/api/v1/enrollment/8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTcxOTMxMTYxNX0.Xg1Orgx51A-rS24KnkLdE2fHBkpwlCo79vuU2EokdyA
+Content-Type: application/json
+
+{
+    "metode_pembayaran": "creditCard",
+    "card_number": 9612,
+    "card_name": "Pikri Syofian",
+    "cvv": 104,
+    "expired": "2025-04-30"
+}
+
+### Get By Enrollment
+GET http://localhost:3000/api/v1/course/user-enrollement
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzAzOTU0OTkwfQ.pPFjyghbLveXJdk6Yeu-BNJHwLM6Dl9DWQP0vrYlNzU
+Content-Type: application/json
+
+### Update Profile
+PUT http://localhost:3000/api/v1/accounts/updateprofile
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzAyOTA5NzUzfQ.66RzvkwvngFogIULZFgyD3pTFfvE3PdQBMSZ5rAjn_0
+Content-Type: multipart/form-data
+
+{
+    "image": "https://ik.imagekit.io/livercourse/1702055226246_2_xswM7Y5.jpeg",
+    "name": "Zaki Firdaus",
+    "email": "zaki@gmail.com",
+    "no_hp": "08928120390",
+    "country": "Indonesia",
+    "city": "Bandung"
+}
+
+### Update Password
+PUT http://localhost:3000/api/v1/accounts/updatepassword
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzAzODI3MDAxfQ.gCah33nqqtWrisWx8zIHebnWmFSsuVHhV-B8P-XdMtk
+Content-Type: application/json
+
+{
+    "password": "#Pikri123",
+    "newPassword": "#Pikri123"
+}
+
+### Payment History
+GET http://localhost:3000/api/v1/accounts/paymenthistory
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzAzOTMzNzc3fQ.FQv1MuHzvdnom9Yjh5ByqrpTDtoP5OmCW7ujuo_hOBM
+Content-Type: application/json
+
+### Notification
+GET http://localhost:3000/api/v1/accounts/notification
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNzAzOTQyNzYyfQ.RT8GG-VY90xhHS2vAisvksN7jnnAac8CVaVAhup_t0c
+Content-Type: application/json
+
+### Dashboard Admin
+GET http://localhost:3000/api/v1/admin/dashboard
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE3MDQyMTQ2MTF9.DMPUTGP81-Bhep6xJ8I1QK69SeGIF6WcJALE5WMdIk8
+Content-Type: application/json
+
+### Kelola Kelas Admin, Contoh Response Pakai Filter (categoryId=4&level=Intermediate&type=isFree)
+GET http://localhost:3000/api/v1/admin/kelolakelas
+Content-Type: application/json
+
+### Delete
+DELETE http://localhost:3000/api/v1/admin/course/4
+Content-Type: application/json
+
+### Login Admin
+POST http://localhost:3000/api/v1/admin/login
+Content-Type: application/json
+
+{
+    "id": 20,
+    "password": "#Ridho123"
+}
+
+### Create Category
+POST http://localhost:3000/api/v1/admin/category
+Content-Type: application/json
+
+{
+  "name": "Java",
+  "image": "image java"
+}
+
+### Create Mentor
+POST http://localhost:3000/api/v1/admin/mentor
+Content-Type: application/json
+
+{
+    "name": "Rizal Akmal"
+}
+
+### Get All Mentor
+GET http://localhost:3000/api/v1/admin/mentor
+Content-Type: application/json
+
+### Create Course
+POST http://localhost:3000/api/v1/admin/course
+Content-Type: application/json
+
+{
+    "category_id": 1,
+    "name": "NANTI HAPUS AJA",
+    "desc": "NANTI HAPUS AJA ADALAH BLALBALBA....",
+    "price": 100000,
+    "level": "Beginner",
+    "type": "isPremium",
+    "intended_for": "1. Cocok untuk pemula yang belum memiliki keahlian desain sama sekali 2. Cocok untuk pemula yang ingin belajar UI Design 3. Cocok untuk designer yang ingin memperdalam style desain ilustrasi 4. Cocok untuk pemula yang ingin membuat ilustrasi dari basic hingga advance",
+    "mentor_id": 3
+}
+
+### Update Course Admin
+PUT http://localhost:3000/api/v1/admin/course
+Content-Type: application/json
+
+{
+    "id": 29,
+    "name": "Kotlin Android Dasar cuy",
+    "price": 100000,
+    "level": "Intermediate",
+    "type": "isPremium",
+    "intended_for": "1. Course ini diperuntukkan kepada pemula yang ingin mempelajari Kotlin Dasar"
+}
+
+### Get All Course
+GET http://localhost:3000/api/v1/admin/course
+Content-Type: application/json
+
+### Create Chapter
+POST http://localhost:3000/api/v1/admin/chapter
+Content-Type: application/json
+
+{
+    "name": "Pendahuluan 2",
+    "course_id": 26
+}
+
+### Get All Chapter
+GET http://localhost:3000/api/v1/admin/chapter
+Content-Type: application/json
+
+### Create Lesson
+POST http://localhost:3000/api/v1/admin/lesson
+Content-Type: application/json
+
+{
+    "name": "Apa lewsaosdas?",
+    "video": "link_video_2",
+    "desc": "di video kali ini bla bla bal",
+    "duration": 4,
+    "chapter_id": 7
+}
+
+###
+GET http://localhost:3000/api/v1/course?search=course&is_premium=true&=popular
+Content-Type: application/json

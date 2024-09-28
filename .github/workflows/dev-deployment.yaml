@@ -1,0 +1,28 @@
+name: Deploy to Vercel (Dev)
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install NodeJS 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Install Packages
+        run: npm install
+
+      - name: Prisma migrate
+        run: npx prisma db push
+        env:
+          DATABASE_PRISMA_URL: ${{ secrets.DATABASE_PRISMA_URL }}
+          DATABASE_URL_NON_POOLING: ${{ secrets.DATABASE_URL_NON_POOLING }}

@@ -1,0 +1,191 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_PRISMA_URL")
+  directUrl = env("DATABASE_URL_NON_POOLING")
+}
+
+model Users {
+  id  Int @id @default(autoincrement())
+  name String
+  email String @unique
+  password String
+  no_hp String?
+  foto_profile String?
+  country String?
+  city  String?
+  is_active Boolean @default(false)
+  is_admin Boolean @default(false)
+  enrollment Enrollments[]
+  creditCard CreditCard[]
+  otp Otp[]
+  notification Notifications[]
+  lesson LessonUpdate[]
+}
+
+model Otp {
+  id        Int      @id @default(autoincrement())
+  kode_otp  String   @unique
+  user_id   Int
+  expiredAt DateTime
+  user      Users    @relation(fields: [user_id], references: [id])
+}
+
+model Categories {
+  id      Int @id @default(autoincrement())
+  name    String
+  image   String?
+  course  CategoriesOnCourses[]
+}
+
+model Mentors {
+  id      Int @id @default(autoincrement())
+  name    String
+  course  MentorsOnCourses[]
+}
+
+model Courses {
+  id              Int @id @default(autoincrement())
+  name            String
+  desc            String
+  price           Int?
+  level           Level
+  rating          Float? @default(0)
+  totalVote       Int? @default(0)
+  averageRatings  Float? @default(0)
+  type            Type @default(isFree)
+  image           String?
+  intended_for    String?
+  total_lesson    Int?
+  total_duration  Int?
+  createdAt       DateTime              @default(now())
+  chapter         Chapters[]
+  enrollment      Enrollments[]
+  mentor          MentorsOnCourses[]
+  category        CategoriesOnCourses[]
+  coursePromo     CoursePromos[]
+}
+
+// Explicit Mentor and Course 
+model MentorsOnCourses {
+  mentor_id Int
+  mentor Mentors @relation(fields: [mentor_id], references: [id])
+  course_id Int
+  course Courses @relation(fields: [course_id], references: [id])
+  assignedAt DateTime @default(now())
+
+  @@id([mentor_id, course_id])
+}
+
+// Explicit Category and Course
+model CategoriesOnCourses {
+  category_id Int
+  category Categories @relation(fields: [category_id], references: [id])
+  course_id Int
+  course Courses @relation(fields: [course_id], references: [id])
+  assignedAt DateTime @default(now())
+
+  @@id([category_id, course_id])
+}
+
+enum Type {
+  isFree
+  isPremium
+}
+
+enum Level {
+  Beginner
+  Intermediate
+  Advanced
+}
+
+model Chapters {
+  id Int @id @default(autoincrement())
+  name String
+  is_preview Boolean @default(false)
+  lesson Lessons[]
+  course_id Int?
+  course Courses? @relation(fields: [course_id], references: [id])
+}
+
+model Lessons {
+  id Int @id @default(autoincrement())
+  name String
+  video String
+  duration Int
+  chapter_id Int
+  chapter Chapters @relation(fields: [chapter_id], references: [id])
+  user LessonUpdate[]
+}
+
+model LessonUpdate {
+  id Int @id @default(autoincrement())
+  user_id Int
+  user Users @relation(fields: [user_id], references: [id])
+  lesson_id Int
+  lesson Lessons @relation(fields: [lesson_id], references: [id])
+}
+
+model Enrollments {
+  id Int @id @default(autoincrement())
+  price Decimal
+  statusPembayaran StatusPembayaran @default(belumBayar)
+  metodePembayaran MetodePembayaran
+  tanggalBayar DateTime @default(now())
+  user_id Int
+  user Users @relation(fields: [user_id], references: [id])
+  course_id_enrollment Int
+  course Courses @relation(fields: [course_id_enrollment], references: [id])
+}
+
+enum StatusPembayaran {
+  belumBayar
+  sudahBayar
+}
+
+enum MetodePembayaran {
+  bankTransfer
+  creditCard
+}
+
+model CreditCard {
+  id String @id
+  number Int
+  name String
+  cvv Int
+  expired DateTime
+  user_id Int
+  user Users @relation(fields: [user_id], references: [id])
+}
+
+model CoursePromos {
+  id Int @id @default(autoincrement())
+  promo_code String @unique
+  discount_percentage Int
+  start_date DateTime
+  end_date DateTime
+  course Courses []
+}
+
+model Notifications {
+  id        Int   @id  @default(autoincrement())
+  type      NotificationType?
+  title     String
+  body      String
+  createAt  DateTime @default(now())
+  expiredAt DateTime
+  user_id   Int?
+  user      Users? @relation(fields: [user_id], references: [id])
+}
+
+enum NotificationType {
+  Promotion
+  updatePassword
+  Transactions
+}
