@@ -3,9 +3,9 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 // const YAML = require('yaml');
-const cors  = require('cors');
+const cors = require('cors');
 // const swaggerUI = require('swagger-ui-express');
-const {PORT=3000} = process.env;
+const { PORT = 3000 } = process.env;
 
 const fs = require("fs");
 // const file = fs.readFileSync('./swagger.yaml', 'utf8');
@@ -34,10 +34,10 @@ app.get('/', (req, res) => {
 
 const authRouter = require('./routes/auth.routes');
 app.use('/api/v1/auth', authRouter);
-  
+
 const courseRouter = require('./routes/course.routes');
-app.use('/api/v1/course', courseRouter); 
-  
+app.use('/api/v1/course', courseRouter);
+
 const categoriesRouter = require('./routes/categories.routes');
 app.use('/api/v1/categories', categoriesRouter);
 
