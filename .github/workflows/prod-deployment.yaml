@@ -27,8 +27,11 @@ jobs:
       - name: Prisma migrate
         run: npx prisma db push
         env:
-          DATABASE_PRISMA_URL: ${{ secrets.DATABASE_PRISMA_URL }}
-          DATABASE_URL_NON_POOLING: ${{ secrets.DATABASE_URL_NON_POOLING }}
+          # DATABASE_PRISMA_URL: ${{ secrets.DATABASE_PRISMA_URL }}
+          # DATABASE_URL_NON_POOLING: ${{ secrets.DATABASE_URL_NON_POOLING }}
+          DATABASE_PRISMA_URL: postgres://default:rpa5mEjk4Qof@ep-round-star-a1ev71aq-pooler.ap-southeast-1.aws.neon.tech:5432/verceldb?sslmode=require&pgbouncer=true&connect_timeout=15
+          DATABASE_URL_NON_POOLING: postgres://default:rpa5mEjk4Qof@ep-round-star-a1ev71aq.ap-southeast-1.aws.neon.tech:5432/verceldb?sslmode=require
+
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
